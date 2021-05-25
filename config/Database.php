@@ -30,5 +30,7 @@ class Database {
         } catch (PDOException $e) {
             echo "Connection Error <br />" . $e->getMessage();
         }
+
+        return $this->conn;
     }
 }
