@@ -25,14 +25,16 @@ class Post {
     }
 
     // Get Posts
-    public  function  read() {
+    public function read($id = NULL)
+    {
         // Select query
-        $sql = 'CALL get_posts()';
+        $sql = 'CALL get_posts(?)';
         // Prepare statement
         $stmt = $this->conn->prepare($sql);
         // Execute query
-        $stmt->execute();
+        $stmt->execute([$id]);
 
         return $stmt;
     }
+
 }

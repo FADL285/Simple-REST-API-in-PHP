@@ -25,7 +25,6 @@ $result = $post->read();
 // number of posts that return
 $num = $result->rowCount();
 
-var_dump($num);
 // Check if there is posts
 if ($num) {
     $posts = $result->fetchAll();
