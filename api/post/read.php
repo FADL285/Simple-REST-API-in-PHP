@@ -37,8 +37,6 @@ if ($num) {
             'title' => $item->title,
             'body' => html_entity_decode($item->body, ENT_QUOTES, 'UTF-8'),
             'author' => $item->author,
-            'category_id' => $item->category_id,
-            'category_name' => $item->category_name,
             'created_at' => $item->created_at
         );
         // Push to data

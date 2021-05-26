@@ -26,7 +26,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 try {
     if (isset($data->title, $data->body, $data->author) && !empty($data->title) && !empty($data->body) && !empty($data->author)) {
-        $status = $post->create($data->title, $data->body, $data->author, isset($data->category_id) ? $data->category_id : 1);
+        $status = $post->create($data->title, $data->body, $data->author);
     } else {
         throw new Exception("Posts params not set");
     }

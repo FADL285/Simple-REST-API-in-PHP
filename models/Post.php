@@ -15,7 +15,7 @@ class Post {
         $this->conn = $db;
     }
 
-    // Get Posts
+    // Get all Posts or single post with id
     public function read($id = NULL)
     {
         // Select query
@@ -28,21 +28,20 @@ class Post {
         return $stmt;
     }
 
-    public function create($title, $body, $author, $category_id)
+    // Create new post
+    public function create($title, $body, $author)
     {
         $title = htmlentities(strip_tags($title), ENT_QUOTES, 'UTF-8');
         $body = htmlentities(strip_tags($body), ENT_QUOTES, 'UTF-8');
         $author = htmlentities(strip_tags($author), ENT_QUOTES, 'UTF-8');
-        $category_id = filter_var($category_id, FILTER_SANITIZE_NUMBER_INT);
         // Create query
-        $sql = "INSERT INTO `posts` (`title`, `body`, `author`, `category_id`) VALUES (:title, :body, :author, :cat_id)";
+        $sql = "INSERT INTO `posts` (`title`, `body`, `author`) VALUES (:title, :body, :author)";
         // Prepare statement
         $stmt = $this->conn->prepare($sql);
         // Bind data
         $stmt->bindParam(':title', $title, PDO::PARAM_INT);
         $stmt->bindParam(':body', $body, PDO::PARAM_STR);
         $stmt->bindParam(':author', $author, PDO::PARAM_STR);
-        $stmt->bindParam(':cat_id', $category_id, PDO::PARAM_STR);
 
         // Execute query
         try {
