@@ -35,7 +35,7 @@ if ($num) {
         $post_items = array(
             'id' => $item->id,
             'title' => $item->title,
-            'body' => html_entity_decode($item->body),
+            'body' => html_entity_decode($item->body, ENT_QUOTES, 'UTF-8'),
             'author' => $item->author,
             'category_id' => $item->category_id,
             'category_name' => $item->category_name,
