@@ -61,7 +61,7 @@ class Post {
         $body = htmlentities(strip_tags($body), ENT_QUOTES, 'UTF-8');
         $author = htmlentities(strip_tags($author), ENT_QUOTES, 'UTF-8');
 
-        // Create query
+        // Update query
         $sql = "UPDATE `posts` SET `title` = :title, `body` = :body, `author` = :author WHERE `id` = :id";
         // Prepare statement
         $stmt = $this->conn->prepare($sql);
@@ -70,6 +70,28 @@ class Post {
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':body', $body, PDO::PARAM_STR);
         $stmt->bindParam(':author', $author, PDO::PARAM_STR);
+
+        // Execute query
+        $stmt->execute();
+
+        if ($stmt->rowCount()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Delete post
+    public function delete($id)
+    {
+        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+
+        // Delete query
+        $sql = "DELETE FROM `posts` WHERE `id` = :id";
+        // Prepare statement
+        $stmt = $this->conn->prepare($sql);
+        // Bind data
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
         // Execute query
         $stmt->execute();

@@ -1,8 +1,8 @@
 <?php
 /**
  * Author: Mohamed Fadl <Mohamed.Fadl2852@gmail.com>
- * Date: 5/26/2021
- * Time: 7:00 PM
+ * Date: 5/27/2021
+ * Time: 5:43 PM
  */
 
 // Headers
@@ -25,15 +25,15 @@ $post = new Post($db);
 $data = json_decode(file_get_contents("php://input"));
 
 try {
-    if (isset($data->id, $data->title, $data->body, $data->author) && !empty($data->title) && !empty($data->body) && !empty($data->author)) {
-        $status = $post->update($data->id, $data->title, $data->body, $data->author);
+    if (isset($data->id) && !empty($data->id)) {
+        $status = $post->delete($data->id);
     } else {
         throw new Exception("Posts params not set :(");
     }
 
     if ($status) {
         echo json_encode(
-            array('status' => 'success', 'message' => 'Post Updated Successfully :)')
+            array('status' => 'success', 'message' => 'Post Deleted Successfully :)')
         );
     } else {
         echo json_encode(
@@ -45,3 +45,5 @@ try {
         array('status' => 'failed', 'message' => 'Error: ' . $e->getMessage())
     );
 }
+
+
